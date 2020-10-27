@@ -16,6 +16,7 @@ import DiscourseURL from "discourse/lib/url";
 import {
   resetSite,
   applyPretender,
+  exists,
 } from "discourse/tests/helpers/qunit-helpers";
 import PreloadStore from "discourse/lib/preload-store";
 import User from "discourse/models/user";
@@ -77,6 +78,18 @@ export default function setupTests(app, container) {
         }
       );
       return window.sinon;
+    },
+  });
+  Object.defineProperty(window, "exists", {
+    get() {
+      deprecated(
+        "Accessing the global function `exists` is deprecated. Import it instead.",
+        {
+          since: "2.6.0.beta.4",
+          dropFrom: "2.6.0",
+        }
+      );
+      return exists;
     },
   });
 
